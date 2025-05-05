@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   description: 'A simple flashcards app for learning languages',
 }
 
+// Setup viewport properly
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export default function RootLayout({
   children,
 }: {

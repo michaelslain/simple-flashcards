@@ -1,5 +1,24 @@
 import { Card } from './types';
 
+// Small utility to help with navigation
+export const routeTracker = {
+  // Keep track of navigation history
+  lastRoute: typeof window !== 'undefined' ? window.sessionStorage.getItem('lastRoute') || '/' : '/',
+  
+  // Update the last route 
+  updateRoute: (route: string) => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('lastRoute', route);
+      routeTracker.lastRoute = route;
+    }
+  },
+  
+  // Get home route safely
+  getHomeRoute: () => {
+    return '/';
+  }
+};
+
 export const generateId = (): string => {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };
@@ -30,20 +49,26 @@ export const parseCSV = (csv: string): { frontText: string, backText: string }[]
 };
 
 export const getNextCardToReview = (cards: Card[]): Card | null => {
-  if (cards.length === 0) return null;
+  if (!cards || cards.length === 0) return null;
   
-  // Sort by a combination of last reviewed time and score
-  const sortedCards = [...cards].sort((a, b) => {
-    // Lower scores should be reviewed more often
-    const scoreWeight = (a.score - b.score) * 10000; 
+  // Always allow review of all cards
+  if (cards.length > 0) {
+    // Sort by a combination of last reviewed time and score
+    const sortedCards = [...cards].sort((a, b) => {
+      // Lower scores should be reviewed more often
+      const scoreWeight = (a.score - b.score) * 10000; 
+      
+      // Earlier last reviewed should be seen first
+      const timeWeight = a.lastReviewed - b.lastReviewed;
+      
+      return timeWeight + scoreWeight;
+    });
     
-    // Earlier last reviewed should be seen first
-    const timeWeight = a.lastReviewed - b.lastReviewed;
-    
-    return timeWeight + scoreWeight;
-  });
+    return sortedCards[0];
+  }
   
-  return sortedCards[0];
+  // Fallback to return any card if sorting failed
+  return cards[0];
 };
 
 export const updateCardScore = (card: Card, rating: number): Card => {
