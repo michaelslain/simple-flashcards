@@ -69,14 +69,51 @@ export const deleteCard = (deckId: string, cardId: string): void => {
   saveDeck(deck);
 };
 
+/**
+ * Calculates deck summaries with improved mastery percentages
+ * 
+ * The mastery calculation now:
+ * - Considers a gradient of mastery (-10 to +10 scale)
+ * - Weights cards with positive scores as partially mastered
+ * - Fully mastered cards (score >= 5) count as 100%
+ * - Cards with scores between 1-4 count proportionally (e.g., +3 = 60% of mastery)
+ * - Cards with negative scores count as 0% mastered
+ */
 export const getDeckSummaries = () => {
   const decks = getDecks();
   
   return decks.map(deck => {
-    const masteredCards = deck.cards.filter(card => card.score >= 5).length;
-    const masteryPercentage = deck.cards.length > 0 
-      ? Math.round((masteredCards / deck.cards.length) * 100) 
-      : 0;
+    if (deck.cards.length === 0) {
+      return {
+        id: deck.id,
+        name: deck.name,
+        cardCount: 0,
+        masteryPercentage: 0
+      };
+    }
+    
+    // For debugging: log score for first few cards
+    console.log(`Deck ${deck.name} card scores:`, deck.cards.slice(0, 5).map(c => c.score));
+    
+    // Calculate weighted mastery - each card contributes to the overall percentage
+    let totalMastery = 0;
+    
+    // Process each card's contribution to mastery
+    deck.cards.forEach(card => {
+      if (card.score >= 5) {
+        // Fully mastered
+        totalMastery += 1.0;
+      } else if (card.score > 0) {
+        // Partially mastered (1=20%, 2=40%, 3=60%, 4=80%)
+        totalMastery += (card.score / 5); 
+      }
+      // Cards with 0 or negative scores contribute nothing
+    });
+    
+    // Calculate final percentage (each card worth 100% when fully mastered)
+    const masteryPercentage = Math.round((totalMastery / deck.cards.length) * 100);
+    
+    console.log(`Deck ${deck.name}: Total mastery ${totalMastery}, Percentage ${masteryPercentage}%`);
     
     return {
       id: deck.id,

@@ -106,7 +106,7 @@ export default function ImportCardsPreviewClient({ deckId }: { deckId: string })
         id: preview.id,
         frontText: preview.frontText,
         backText: preview.backText,
-        score: 0,
+        score: 0, // Explicitly as a number
         lastReviewed: Date.now()
       };
       

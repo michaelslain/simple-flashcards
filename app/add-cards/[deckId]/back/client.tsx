@@ -45,7 +45,7 @@ export default function AddCardsBackClient({ deckId }: { deckId: string }) {
       id: generateId(),
       frontText,
       backText,
-      score: 0,
+      score: 0, // Explicitly initialize as a number
       lastReviewed: Date.now()
     };
     

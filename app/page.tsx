@@ -15,7 +15,18 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    setDecks(getDeckSummaries());
+    // Get the most up-to-date deck summaries
+    const updatedDecks = getDeckSummaries();
+    setDecks(updatedDecks);
+    
+    // Force refresh if there are decks with cards
+    const hasDecksWithCards = updatedDecks.some(deck => deck.cardCount > 0);
+    if (hasDecksWithCards) {
+      // Re-fetch after a short delay to ensure proper rendering
+      setTimeout(() => {
+        setDecks(getDeckSummaries());
+      }, 100);
+    }
   }, []);
 
   const handleAddDeck = () => {
