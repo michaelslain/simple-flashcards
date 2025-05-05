@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import BackButton from '@/components/BackButton';
 import EditCardFront from '@/components/EditCardFront';
 import { getDeck } from '@/util/storage';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function AddCardsFront({ params }: { params: { deckId: string } }) {
@@ -27,7 +28,10 @@ export default function AddCardsFront({ params }: { params: { deckId: string } }
   };
 
   const handleNext = () => {
-    if (!frontText.trim()) return;
+    if (!frontText.trim()) {
+      toast.error('Please enter some text for the front of the card');
+      return;
+    }
     router.push(`/add-cards/${deckId}/back?front=${encodeURIComponent(frontText)}`);
   };
 

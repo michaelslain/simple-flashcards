@@ -7,6 +7,7 @@ import BackCard from '@/components/BackCard';
 import { getDeck, saveCard } from '@/util/storage';
 import { Card } from '@/util/types';
 import { updateCardScore } from '@/util/utils';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function ReviewBack({ params }: { params: { deckId: string } }) {
@@ -36,6 +37,14 @@ export default function ReviewBack({ params }: { params: { deckId: string } }) {
     if (currentCard && deckId) {
       const updatedCard = updateCardScore(currentCard, rating);
       saveCard(deckId, updatedCard);
+      
+      // Show appropriate toast based on rating
+      if (rating >= 1) {
+        toast.success(`Card score increased! ${rating > 1 ? 'Well done!' : ''}`);
+      } else {
+        toast.info(`Card score decreased. You'll see this card again soon.`);
+      }
+      
       router.push(`/review/${deckId}`);
     }
   };

@@ -6,6 +6,7 @@ import BackButton from '@/components/BackButton';
 import EditCard from '@/components/EditCard';
 import { getDeck, saveCard } from '@/util/storage';
 import { Card } from '@/util/types';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function EditCardPage({ 
@@ -35,6 +36,9 @@ export default function EditCardPage({
     }
   }, [deckId, cardId, router]);
 
+  // Track whether we've shown a toast for this update
+  const [hasShownToast, setHasShownToast] = useState(false);
+  
   useEffect(() => {
     if (card && (frontText !== card.frontText || backText !== card.backText)) {
       const updatedCard = {
@@ -43,8 +47,21 @@ export default function EditCardPage({
         backText
       };
       saveCard(deckId, updatedCard);
+      
+      // Only show the toast if text has changed and we haven't shown it yet
+      if (!hasShownToast && (frontText.trim() !== '' || backText.trim() !== '')) {
+        toast.success('Card updated!');
+        setHasShownToast(true);
+        
+        // Reset the toast flag after a delay so it can show again if more changes are made
+        const timer = setTimeout(() => {
+          setHasShownToast(false);
+        }, 1000);
+        
+        return () => clearTimeout(timer);
+      }
     }
-  }, [frontText, backText, card, deckId]);
+  }, [frontText, backText, card, deckId, hasShownToast]);
 
   const handleBackClick = () => {
     router.push(`/edit-deck/${deckId}`);

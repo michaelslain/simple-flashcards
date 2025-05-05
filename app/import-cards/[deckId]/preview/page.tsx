@@ -88,7 +88,12 @@ export default function ImportCardsPreview({ params }: { params: { deckId: strin
   };
 
   const handleDeleteCard = (cardId: string) => {
+    const card = cardPreviews.find(c => c.id === cardId);
     setCardPreviews(cardPreviews.filter(card => card.id !== cardId));
+    
+    if (card) {
+      toast.info(`Removed "${card.frontText}" from import list`);
+    }
   };
 
   const handleImport = () => {

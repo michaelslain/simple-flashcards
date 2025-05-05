@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import Button from './Button';
 import styles from './SoundButton.module.scss';
@@ -11,7 +11,10 @@ interface SoundButtonProps {
 const SoundButton: FC<SoundButtonProps> = ({ text, className = '' }) => {
   const { speak, voices } = useSpeechSynthesis();
   
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent) => {
+    // Stop the event from bubbling up to parent elements
+    e.stopPropagation();
+    
     if (text) {
       speak({ text });
     }

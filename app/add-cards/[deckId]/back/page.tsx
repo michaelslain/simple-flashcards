@@ -31,7 +31,16 @@ export default function AddCardsBack({ params }: { params: { deckId: string } })
   };
 
   const handleNext = () => {
-    if (!backText.trim() || !frontText.trim()) return;
+    if (!frontText.trim()) {
+      toast.error('Front text is missing');
+      router.push(`/add-cards/${deckId}`);
+      return;
+    }
+    
+    if (!backText.trim()) {
+      toast.error('Please enter some text for the back of the card');
+      return;
+    }
     
     const newCard = {
       id: generateId(),
@@ -42,7 +51,7 @@ export default function AddCardsBack({ params }: { params: { deckId: string } })
     };
     
     saveCard(deckId, newCard);
-    toast.success('Card added!');
+    toast.success(`New card "${frontText}" added!`);
     router.push(`/add-cards/${deckId}`);
   };
 

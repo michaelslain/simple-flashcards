@@ -7,6 +7,7 @@ import ListItem from '@/components/ListItem';
 import Button from '@/components/Button';
 import { getDeckSummaries, deleteDeck } from '@/util/storage';
 import { DeckSummary } from '@/util/types';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -26,8 +27,13 @@ export default function Home() {
   };
 
   const handleDeleteDeck = (deckId: string) => {
+    const deck = getDeckSummaries().find(d => d.id === deckId);
+    const deckName = deck ? deck.name : 'Deck';
+    
     deleteDeck(deckId);
     setDecks(getDeckSummaries());
+    
+    toast.success(`${deckName} deleted successfully!`);
   };
 
   const handleReviewDeck = (deckId: string) => {

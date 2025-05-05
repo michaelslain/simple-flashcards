@@ -3,6 +3,7 @@ import Card from './Card';
 import Heading from './Heading';
 import Subheading from './Subheading';
 import Button from './Button';
+import SoundButton from './SoundButton';
 import styles from './BackCard.module.scss';
 
 interface BackCardProps {
@@ -22,6 +23,7 @@ const BackCard: FC<BackCardProps> = ({
     <Card className={styles.backCard}>
       <Subheading className={styles.frontText}>{frontText}</Subheading>
       <Heading className={styles.backText}>{backText}</Heading>
+      <SoundButton text={backText} />
       
       <div className={styles.ratings}>
         <Button

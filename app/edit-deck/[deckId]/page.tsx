@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import ListItem from '@/components/ListItem';
 import { getDeck, deleteCard } from '@/util/storage';
 import { Card } from '@/util/types';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function EditDeck({ params }: { params: { deckId: string } }) {
@@ -42,11 +43,17 @@ export default function EditDeck({ params }: { params: { deckId: string } }) {
   };
 
   const handleDeleteCard = (cardId: string) => {
+    // Get the card text before deleting
+    const card = cards.find(c => c.id === cardId);
+    const cardFrontText = card ? card.frontText : 'Card';
+    
     deleteCard(deckId, cardId);
     const deck = getDeck(deckId);
     if (deck) {
       setCards(deck.cards);
     }
+    
+    toast.success(`Card "${cardFrontText}" deleted successfully!`);
   };
 
   return (

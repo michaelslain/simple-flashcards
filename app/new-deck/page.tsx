@@ -8,6 +8,7 @@ import NextButton from '@/components/NextButton';
 import Card from '@/components/Card';
 import { saveDeck } from '@/util/storage';
 import { generateId } from '@/util/utils';
+import { toast } from 'react-toastify';
 import styles from './page.module.scss';
 
 export default function NewDeck() {
@@ -19,7 +20,10 @@ export default function NewDeck() {
   };
 
   const handleNextClick = () => {
-    if (!deckName.trim()) return;
+    if (!deckName.trim()) {
+      toast.error('Please enter a deck name');
+      return;
+    }
     
     const newDeck = {
       id: generateId(),
@@ -29,6 +33,7 @@ export default function NewDeck() {
     };
     
     saveDeck(newDeck);
+    toast.success(`Deck "${deckName}" created successfully!`);
     router.push('/');
   };
 
