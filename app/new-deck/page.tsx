@@ -1,0 +1,50 @@
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import BackButton from '@/components/BackButton';
+import Input from '@/components/Input';
+import NextButton from '@/components/NextButton';
+import Card from '@/components/Card';
+import { saveDeck } from '@/util/storage';
+import { generateId } from '@/util/utils';
+import styles from './page.module.scss';
+
+export default function NewDeck() {
+  const [deckName, setDeckName] = useState('');
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.push('/');
+  };
+
+  const handleNextClick = () => {
+    if (!deckName.trim()) return;
+    
+    const newDeck = {
+      id: generateId(),
+      name: deckName,
+      cards: [],
+      createdAt: Date.now()
+    };
+    
+    saveDeck(newDeck);
+    router.push('/');
+  };
+
+  return (
+    <main className={styles.newDeckPage}>
+      <BackButton onClick={handleBackClick} />
+      
+      <Card className={styles.newDeckCard}>
+        <Input
+          value={deckName}
+          onChange={(e) => setDeckName(e.target.value)}
+          placeholder="deck name..."
+          className={styles.deckNameInput}
+        />
+        <NextButton onClick={handleNextClick} />
+      </Card>
+    </main>
+  );
+}

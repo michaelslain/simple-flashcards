@@ -1,0 +1,10 @@
+.editCardBack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .backInput {
+    margin: 1rem 0;
+    text-align: center;
+  }
+}

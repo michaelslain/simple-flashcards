@@ -1,0 +1,26 @@
+.homePage {
+  padding: 1rem;
+  max-width: 100%;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.deckListHeader {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.deckList {
+  margin-top: 1rem;
+}
+
+.deckName {
+  cursor: pointer;
+}
+
+.noDecksMessage {
+  text-align: center;
+  margin-top: 2rem;
+  color: rgba(0, 0, 0, 0.5);
+}

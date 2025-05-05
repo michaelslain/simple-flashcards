@@ -1,0 +1,42 @@
+.importCardsPreviewPage {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.deckName {
+  text-align: center;
+  margin: 2rem 0 1rem;
+  font-weight: normal;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+
+.attachCsvButton {
+  /* Any specific styles for the button if needed */
+}
+
+.cardPreviews {
+  margin-top: 1rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.noCardsMessage {
+  text-align: center;
+  margin-top: 2rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.importAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
