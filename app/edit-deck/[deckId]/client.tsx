@@ -10,6 +10,8 @@ import { Card } from '@/util/types'
 import { toast } from 'react-toastify'
 import styles from './page.module.scss'
 import Subheading from '@/components/Subheading'
+import LanguageFont from '@/components/LanguageFont'
+
 export default function EditDeckClient({ deckId }: { deckId: string }) {
     const [cards, setCards] = useState<Card[]>([])
     const [deckName, setDeckName] = useState('')
@@ -84,7 +86,13 @@ export default function EditDeckClient({ deckId }: { deckId: string }) {
                             onEdit={() => handleEditCard(card.id)}
                             onDelete={() => handleDeleteCard(card.id)}
                         >
-                            {card.frontText} - {card.backText}
+                            <LanguageFont text={card.frontText}>
+                                {card.frontText}
+                            </LanguageFont>{' '}
+                            -{' '}
+                            <LanguageFont text={card.backText}>
+                                {card.backText}
+                            </LanguageFont>
                         </ListItem>
                     ))
                 )}
