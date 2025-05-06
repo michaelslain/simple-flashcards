@@ -1,74 +1,71 @@
 @font-face {
-  font-family: 'Comic Sans MS';
-  src: url('https://cdn.jsdelivr.net/npm/comic-sans-ms-font@1.0.0/comic-sans-ms.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/npm/comic-sans-ms-font@1.0.0/comic-sans-ms.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Comic Sans MS';
+    src: url('https://cdn.jsdelivr.net/npm/comic-sans-ms-font@1.0.0/comic-sans-ms.woff2')
+            format('woff2'),
+        url('https://cdn.jsdelivr.net/npm/comic-sans-ms-font@1.0.0/comic-sans-ms.woff')
+            format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 html,
 body {
-  max-width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: black;
-  background-color: white;
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: black;
+    background-color: white;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 button {
-  cursor: pointer;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+    cursor: pointer;
 }
 
 input {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+    border-bottom: 1px solid black;
 }
 
-button, input {
-  background: none;
-  border: none;
-  outline: none;
-  color: black;
-}
-
+button,
 input {
-  border-bottom: 1px solid black;
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
 }
 
 input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .page-animation-enter {
-  opacity: 0;
-  transform: translateX(20px);
+    opacity: 0;
+    transform: translateX(20px);
 }
 
 .page-animation-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 200ms, transform 200ms;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 200ms, transform 200ms;
 }
 
 .page-animation-exit {
-  opacity: 1;
-  transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .page-animation-exit-active {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 200ms, transform 200ms;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 200ms, transform 200ms;
 }
