@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import BackButton from '@/components/BackButton'
-import Button from '@/components/Button'
+import BackButton from '@/components/buttons/BackButton'
+import Button from '@/components/buttons/Button'
 import ListItem from '@/components/ListItem'
-import NextButton from '@/components/NextButton'
+import NextButton from '@/components/buttons/NextButton'
 import { getDeck, saveCard } from '@/util/storage'
 import { parseCSV, generateId } from '@/util/utils'
 import { toast } from 'react-toastify'

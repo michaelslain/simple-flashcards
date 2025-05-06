@@ -17,9 +17,10 @@
     "sass": "^1.87.0"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
     "@types/node": "latest",
-    "@types/react-dom": "latest"
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/react-speech-kit": "^3.0.0",
+    "typescript": "latest"
   }
 }

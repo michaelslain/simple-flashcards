@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import BackButton from '@/components/BackButton'
-import Button from '@/components/Button'
+import BackButton from '@/components/buttons/BackButton'
+import Button from '@/components/buttons/Button'
 import { getDeck } from '@/util/storage'
 import { toast } from 'react-toastify'
 import styles from './page.module.scss'

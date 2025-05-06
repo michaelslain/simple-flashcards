@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import BackButton from '@/components/BackButton'
-import Button from '@/components/Button'
-import FrontCard from '@/components/FrontCard'
+import BackButton from '@/components/buttons/BackButton'
+import FrontCard from '@/components/cards/FrontCard'
 import ErrorHandler from '@/components/ErrorHandler'
 import { getDeck } from '@/util/storage'
 import { Card } from '@/util/types'

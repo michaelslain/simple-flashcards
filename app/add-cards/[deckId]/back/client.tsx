@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import BackButton from '@/components/BackButton'
-import EditCardBack from '@/components/EditCardBack'
+import BackButton from '@/components/buttons/BackButton'
+import EditCardBack from '@/components/cards/EditCardBack'
 import { getDeck, saveCard } from '@/util/storage'
 import { generateId } from '@/util/utils'
 import { toast } from 'react-toastify'

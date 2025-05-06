@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import BackButton from '@/components/BackButton'
-import BackCard from '@/components/BackCard'
+import BackButton from '@/components/buttons/BackButton'
+import BackCard from '@/components/cards/BackCard'
 import ErrorHandler from '@/components/ErrorHandler'
 import { getDeck, saveCard } from '@/util/storage'
 import { Card } from '@/util/types'
